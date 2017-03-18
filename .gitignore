@@ -2,6 +2,8 @@
 Thumbs.db
 ehthumbs.db
 
+.idea
+scripts/logs
 # Folder config file
 Desktop.ini
 

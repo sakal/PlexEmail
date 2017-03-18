@@ -910,7 +910,7 @@ plexWebLink = ''
 
 if (config['filter_include_plex_web_link']):
   if (config['plex_web_server_guid'] != ''):
-    plexWebLink = 'http://plex.tv/web/app#!/server/' + config['plex_web_server_guid'] + '/details/%2Flibrary%2Fmetadata%2F'
+    plexWebLink = 'http://plex.tv/web/app#!/server/' + config['plex_web_server_guid'] + '/details?key=%2Flibrary%2Fmetadata%2F'
   else:
     logging.info('Including Plex Web Link - Getting machine identifier from the DLNA DB')
     DLNA_DB_FILE = config['plex_data_folder'] + 'Plex Media Server' + os.path.sep + 'Plug-in Support' + os.path.sep + 'Databases' + os.path.sep + 'com.plexapp.dlna.db'
@@ -923,7 +923,7 @@ if (config['filter_include_plex_web_link']):
         cur = con.cursor()    
         cur.execute('SELECT machine_identifier FROM remote_servers WHERE url LIKE "http://127.0.0.1%";')
         for row in cur:
-          plexWebLink = 'http://plex.tv/web/app#!/server/' + row[0] + '/details/%2Flibrary%2Fmetadata%2F'
+          plexWebLink = 'http://plex.tv/web/app#!/server/' + row[0] + '/details?key=%2Flibrary%2Fmetadata%2F'
           logging.info('plexWebLink = ' + plexWebLink)
         cur.close()
         del cur
@@ -973,7 +973,7 @@ with con:
     cur = con.cursor()    
     cur.execute(dbQuery)
 
-    response = {};
+    response = {}
     logging.debug('Response:')
     for row in cur:
       response[row[0]] = {'id': row[0], 'parent_id': row[1], 'metadata_type': row[2], 'title': row[3], 'title_sort': row[4], 'original_title': row[5], 'rating': row[6], 'tagline': row[7], 'summary': row[8], 'content_rating': row[9], 'duration': row[10], 'user_thumb_url': row[11], 'tags_genre': row[12], 'tags_director': row[13], 'tags_star': row[14], 'year': row[15], 'hash': row[16], 'index': row[17], 'studio': row[18], 'real_duration': row[19], 'air_date': row[20]}
