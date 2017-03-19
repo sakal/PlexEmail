@@ -62,7 +62,10 @@ https://forum.qnap.com/viewtopic.php?f=177&t=125414
 2. Download zip from https://github.com/sakal/PlexEmail/archive/osx.zip
 3. Unpack it to ~/PlexEmail (or to any directory you prefer)
 4. Update ~/PlexEmail/scripts/config.conf
-5. Run in terminal: ```echo "0 8 * * 5 /usr/bin/python2.7 /Users/username/PlexEmail/scripts/plexEmail.py>/dev/null 2>&1" | crontab -u username -```
+5. Run in terminal:
+  ```
+  echo "0 8 * * 5 /usr/bin/python2.7 /Users/username/PlexEmail/scripts/plexEmail.py>/dev/null 2>&1" | crontab -u username -
+  ```
 
 ## Usage
 
