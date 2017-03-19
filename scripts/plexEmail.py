@@ -1090,7 +1090,7 @@ with con:
       movies[movie] = convertToHumanReadable(movies[movie])
       title = ''
       if ('original_title' in movies[movie] and movies[movie]['original_title'] != ''):
-        title += movies[movie]['original_title'] + ' AKA '
+        title += movies[movie]['original_title'] + ' / '
       title += movies[movie]['title']
       hash = str(movies[movie]['hash'])
       imageInfo = {}
@@ -1150,7 +1150,7 @@ with con:
       tvShows[show] = convertToHumanReadable(tvShows[show])
       title = ''
       if (tvShows[show]['original_title'] != ''):
-        title += tvShows[show]['original_title'] + ' AKA '
+        title += tvShows[show]['original_title'] + ' / '
       title += tvShows[show]['title']
       hash = str(tvShows[show]['hash'])
       imageInfo = {}
@@ -1232,7 +1232,7 @@ with con:
       tvSeasons[season] = convertToHumanReadable(tvSeasons[season])
       title = ''
       if (tvSeasons[season]['original_title'] != ''):
-        title += tvSeasons[season]['original_title'] + ' AKA '
+        title += tvSeasons[season]['original_title'] + ' / '
       title += tvSeasons[season]['title']
       imageInfo = {}
       if (tvSeasons[season]['user_thumb_url'] != ''):
@@ -1343,11 +1343,11 @@ with con:
         tvEpisodes[episode] = convertToHumanReadable(tvEpisodes[episode])
         showTitle = ''
         if (tvEpisodes[episode]['show_original_title'] != ''):
-          showTitle += tvEpisodes[episode]['show_original_title'] + ' AKA '
+          showTitle += tvEpisodes[episode]['show_original_title'] + ' / '
         showTitle += tvEpisodes[episode]['show_title']
         title = ''
         if (tvEpisodes[episode]['original_title'] != ''):
-          title += tvEpisodes[episode]['original_title'] + ' AKA '
+          title += tvEpisodes[episode]['original_title'] + ' / '
         title += tvEpisodes[episode]['title']
         imageInfo = {}
         imageTypeToUse = 'show' if (tvEpisodes[episode]['show_thumb_url'] != '' and config['filter_episode_thumbnail_type'] == 'show') else 'season' if (tvEpisodes[episode]['season_thumb_url'] != '' and config['filter_episode_thumbnail_type'] == 'season') else 'episode' if (tvEpisodes[episode]['user_thumb_url'] != '') else ''
@@ -1419,7 +1419,7 @@ with con:
       artists[artist] = convertToHumanReadable(artists[artist])
       title = ''
       if (artists[artist]['original_title'] != ''):
-        title += artists[artist]['original_title'] + ' AKA '
+        title += artists[artist]['original_title'] + ' / '
       title += artists[artist]['title']
       hash = str(artists[artist]['hash'])
       imageInfo = {}
@@ -1523,7 +1523,7 @@ with con:
       albums[album] = convertToHumanReadable(albums[album])
       title = ''
       if (albums[album]['original_title'] != ''):
-        title += albums[album]['original_title'] + ' AKA '
+        title += albums[album]['original_title'] + ' / '
       title += albums[album]['title']
       imageInfo = {}
       if (albums[album]['user_thumb_url'] != ''):
@@ -1627,11 +1627,11 @@ with con:
         # songs[song] = convertToHumanReadable(songs[song])
         # showTitle = ''
         # if (songs[song]['show_original_title'] != ''):
-          # showTitle += songs[song]['show_original_title'] + ' AKA '
+          # showTitle += songs[song]['show_original_title'] + ' / '
         # showTitle += songs[song]['show_title']
         # title = ''
         # if (songs[song]['original_title'] != ''):
-          # title += songs[song]['original_title'] + ' AKA '
+          # title += songs[song]['original_title'] + ' / '
         # title += songs[song]['title']
         # hash = str(songs[song]['hash'])
         # imageInfo = {}
