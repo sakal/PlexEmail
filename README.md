@@ -58,7 +58,7 @@ https://forum.qnap.com/viewtopic.php?f=177&t=125414
 
 ## Installation (OSX)
 
-1. Run in terminal: ```easy_install requests```
+1. Run in terminal: ```sudo easy_install requests```
 2. Download zip from https://github.com/sakal/PlexEmail/archive/osx.zip
 3. Unpack it to ~/PlexEmail (or to any directory you prefer)
 4. Update ~/PlexEmail/scripts/config.conf
