@@ -60,12 +60,13 @@ https://forum.qnap.com/viewtopic.php?f=177&t=125414
 
 1. Run in terminal: ```sudo easy_install requests```
 2. Download zip from https://github.com/sakal/PlexEmail/archive/osx.zip
-3. Unpack it to ~/PlexEmail (or to any directory you prefer)
-4. Update ~/PlexEmail/scripts/config.conf
-5. Run in terminal:
-  ```
-  echo "0 8 * * 5 /usr/bin/python2.7 /Users/username/PlexEmail/scripts/plexEmail.py>/dev/null 2>&1" | crontab -u username -
-  ```
+3. Unpack it to /opt/PlexEmail (or to any directory you prefer)
+4. Update /opt/PlexEmail/scripts/config.conf
+5. Copy ```com.plexemail.plist``` to ```~/Library/LaunchAgents/``` and load plist by launchctl:
+   ```
+   cp /opt/PlexEmail/scripts/com.plexemail.plist ~/Library/LaunchAgents/
+   launchctl load com.plexemail
+   ```
 
 ## Usage
 
