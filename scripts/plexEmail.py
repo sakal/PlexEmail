@@ -487,7 +487,10 @@ def uploadToCloudinary(imgToUpload):
       imgToUpload = os.path.realpath(imgToUpload)
     if (imghdr.what(imgToUpload)):
       logging.info('uploadToCloudinary: start upload to cloudinary')
-      response = cloudinary.uploader.upload(imgToUpload)
+      response = cloudinary.uploader.upload(
+        imgToUpload,
+        eager=[{'width': 308, 'crop': 'scale'}]
+      )
       logging.info('uploadToCloudinary: response = ' + str(response))
       url = response['secure_url'] if (config['upload_cloudinary_use_https']) else response['url']
       logging.info('uploadToCloudinary: url = ' + url)
@@ -1088,10 +1091,9 @@ with con:
     
     for movie in movies:
       movies[movie] = convertToHumanReadable(movies[movie])
-      title = ''
+      title = movies[movie]['title']
       if ('original_title' in movies[movie] and movies[movie]['original_title'] != ''):
-        title += movies[movie]['original_title'] + ' / '
-      title += movies[movie]['title']
+        title = ' / '.join([title, movies[movie]['original_title']])
       hash = str(movies[movie]['hash'])
       imageInfo = {}
       imageInfo['thumb'] = movies[movie]['user_thumb_url']
@@ -1107,10 +1109,10 @@ with con:
       
       emailText += '<table><tr width="100%">'
       if (config['filter_show_email_images']):
-        emailText += '<td width="200">'
+        emailText += '<td width="200" valign="top" style="padding-top: 15px;">'
         emailText += '<a target="_blank" href="' + pwLink + '"><img class="featurette-image img-responsive pull-left" src="' + imageInfo['emailImgPath'].decode('utf-8') +'" width="154"></a>'
         emailText += '</td>'
-      emailText += '<td><h2 class="featurette-heading"><a target="_blank" style="color: #000000;" href="' + pwLink + '">' + title.decode('utf-8') + '</a></h2>'
+      emailText += '<td valign="top"><h2 class="featurette-heading"><a target="_blank" style="color: #000000;" href="' + pwLink + '">' + title.decode('utf-8') + '</a></h2>'
       htmlText += '<div class="featurette" id="movies">'
       htmlText += '<a target="_blank" href="' + pwLink + '"><img class="featurette-image img-responsive pull-left" src="' + imageInfo['webImgPath'].decode('utf-8') + '" width="154px" height="218px"></a>'
       htmlText += '<div style="margin-left: 200px;"><h2 class="featurette-heading"><a target="_blank" style="color: #000000;" href="' + pwLink + '">' + title.decode('utf-8') + '</a></h2>'
@@ -1148,10 +1150,9 @@ with con:
     
     for show in tvShows:
       tvShows[show] = convertToHumanReadable(tvShows[show])
-      title = ''
+      title = tvShows[show]['title']
       if (tvShows[show]['original_title'] != ''):
-        title += tvShows[show]['original_title'] + ' / '
-      title += tvShows[show]['title']
+        title = ' / '.join([title, tvShows[show]['original_title']])
       hash = str(tvShows[show]['hash'])
       imageInfo = {}
       imageInfo['thumb'] = tvShows[show]['user_thumb_url']
@@ -1230,10 +1231,9 @@ with con:
     
     for season in tvSeasons:
       tvSeasons[season] = convertToHumanReadable(tvSeasons[season])
-      title = ''
+      title = tvSeasons[season]['title']
       if (tvSeasons[season]['original_title'] != ''):
-        title += tvSeasons[season]['original_title'] + ' / '
-      title += tvSeasons[season]['title']
+        title = ' / '.join([title, tvSeasons[season]['original_title']])
       imageInfo = {}
       if (tvSeasons[season]['user_thumb_url'] != ''):
         imageInfo['thumb'] = tvSeasons[season]['user_thumb_url']
@@ -1341,14 +1341,12 @@ with con:
     for episode in tvEpisodes:
       if (tvEpisodes[episode]['parent_id'] not in tvSeasons):
         tvEpisodes[episode] = convertToHumanReadable(tvEpisodes[episode])
-        showTitle = ''
+        showTitle = tvEpisodes[episode]['show_title']
         if (tvEpisodes[episode]['show_original_title'] != ''):
-          showTitle += tvEpisodes[episode]['show_original_title'] + ' / '
-        showTitle += tvEpisodes[episode]['show_title']
-        title = ''
+          showTitle = ' / '.join([showTitle, tvEpisodes[episode]['show_original_title']])
+        title = tvEpisodes[episode]['title']
         if (tvEpisodes[episode]['original_title'] != ''):
-          title += tvEpisodes[episode]['original_title'] + ' / '
-        title += tvEpisodes[episode]['title']
+          title = ' / '.join([title, tvEpisodes[episode]['original_title']])
         imageInfo = {}
         imageTypeToUse = 'show' if (tvEpisodes[episode]['show_thumb_url'] != '' and config['filter_episode_thumbnail_type'] == 'show') else 'season' if (tvEpisodes[episode]['season_thumb_url'] != '' and config['filter_episode_thumbnail_type'] == 'season') else 'episode' if (tvEpisodes[episode]['user_thumb_url'] != '') else ''
         logging.info('main: imageTypeToUse = ' + imageTypeToUse)
@@ -1417,10 +1415,9 @@ with con:
     
     for artist in artists:
       artists[artist] = convertToHumanReadable(artists[artist])
-      title = ''
+      title = artists[artist]['title']
       if (artists[artist]['original_title'] != ''):
-        title += artists[artist]['original_title'] + ' / '
-      title += artists[artist]['title']
+        title = ' / '.join([title, artists[artist]['original_title']])
       hash = str(artists[artist]['hash'])
       imageInfo = {}
       imageInfo['thumb'] = artists[artist]['user_thumb_url']
@@ -1521,10 +1518,9 @@ with con:
     
     for album in albums:
       albums[album] = convertToHumanReadable(albums[album])
-      title = ''
+      title = albums[album]['title']
       if (albums[album]['original_title'] != ''):
-        title += albums[album]['original_title'] + ' / '
-      title += albums[album]['title']
+        title = ' / '.join([title, albums[album]['original_title']])
       imageInfo = {}
       if (albums[album]['user_thumb_url'] != ''):
         imageInfo['thumb'] = albums[album]['user_thumb_url']
